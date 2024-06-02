@@ -1,4 +1,5 @@
 import { app } from "./app";
+import { apply_action, do_action } from "./core/event-manager/hooks";
 
 const port = app.get("port");
 
@@ -32,6 +33,8 @@ function onListening() {
     const bind =
         typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
     console.log(`Listening on ${bind}`);
+
+    do_action("init", { app: true });
 }
 
 export default server;
